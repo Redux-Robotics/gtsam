@@ -36,7 +36,7 @@ jobs:
         # Github Actions requires a single row to be added to the build matrix.
         # See https://help.github.com/en/articles/workflow-syntax-for-github-actions.
         name: [
-            windows-2022-cl,
+            blacksmith-4vcpu-windows-2025,
           ]
 
         build_type: [
@@ -46,7 +46,7 @@ jobs:
 
         build_unstable: [ON]
         include:
-          - name: windows-2022-cl
+          - name: blacksmith-4vcpu-windows-2025
             os: windows-2022
             compiler: cl
             platform: 64

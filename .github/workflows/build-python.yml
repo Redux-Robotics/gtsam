@@ -19,7 +19,7 @@ concurrency:
 jobs:
   # Check paths of changed files to see if any are non-ignored.
   check-paths:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     outputs:
       should_run: ${{ steps.filter.outputs.relevant_changes }}
     steps:
@@ -61,7 +61,7 @@ jobs:
         name:
           [
             ubuntu-22.04-gcc-11,
-            ubuntu-22.04-gcc-11-noboost,
+            blacksmith-4vcpu-ubuntu-2204,
             ubuntu-22.04-clang-11,
             macos-15-xcode-16,
             windows-2022-msvc,
@@ -75,7 +75,7 @@ jobs:
             compiler: gcc
             version: "11"
 
-          - name: ubuntu-22.04-gcc-11-noboost
+          - name: blacksmith-4vcpu-ubuntu-2204
             os: ubuntu-22.04
             compiler: gcc
             version: "11"
