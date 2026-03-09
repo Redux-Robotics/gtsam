@@ -36,7 +36,7 @@ jobs:
             ubuntu-24.04-gcc-14,
             ubuntu-24.04-clang-16,
             ubuntu-24.04-clang-16-boost,
-            ubuntu-24.04-clang-16-geographiclib,
+            blacksmith-2vcpu-ubuntu-2404,
           ]
 
         build_type: [Debug, Release]
@@ -67,7 +67,7 @@ jobs:
             compiler: clang
             version: "16"
 
-          - name: ubuntu-24.04-clang-16-geographiclib
+          - name: blacksmith-2vcpu-ubuntu-2404
             os: ubuntu-24.04
             compiler: clang
             version: "16"
@@ -75,7 +75,7 @@ jobs:
         exclude:
           - name: ubuntu-24.04-clang-16-boost
             build_type: Debug
-          - name: ubuntu-24.04-clang-16-geographiclib
+          - name: blacksmith-2vcpu-ubuntu-2404
             build_type: Debug
 
     steps:
