@@ -83,5 +83,6 @@ jobs:
       - name: Build and Test
         run: |
           # Ensure workspace permissions for the container
+          apt-get update && apt-get install -y git
           git config --global --add safe.directory /gtsam
           .github/scripts/unix.sh -t
