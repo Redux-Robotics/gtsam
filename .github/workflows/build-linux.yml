@@ -28,35 +28,37 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        # Use only one source of truth for the matrix to avoid mismatched keys
         build_type: [Debug, Release]
-        build_unstable: [ON]
+        build_unstable: ["ON"]
+        # Define the primary axis here to trigger the Cartesian product
+        name: 
+          - ubuntu-22.04-gcc-11
+          - ubuntu-22.04-clang-11
+          - ubuntu-24.04-gcc-14
+          - ubuntu-24.04-clang-16
+          - ubuntu-24.04-clang-16-boost
         include:
+          # This attaches the correct variables to the names above
           - name: ubuntu-22.04-gcc-11
             os: ubuntu-22.04
             compiler: gcc
             version: "11"
-
           - name: ubuntu-22.04-clang-11
             os: ubuntu-22.04
             compiler: clang
             version: "11"
-
           - name: ubuntu-24.04-gcc-14
             os: ubuntu-24.04
             compiler: gcc
             version: "14"
-
           - name: ubuntu-24.04-clang-16
             os: ubuntu-24.04
             compiler: clang
             version: "16"
-
           - name: ubuntu-24.04-clang-16-boost
             os: ubuntu-24.04
             compiler: clang
             version: "16"
-
         exclude:
           - name: ubuntu-24.04-clang-16-boost
             build_type: Debug
@@ -65,13 +67,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Removed the space before the colon
       - name: Set Boost Environment (Conditional)
         if: contains(matrix.name, 'boost') && matrix.build_type == 'Release'
         run: |
           echo "GTSAM_USE_BOOST_FEATURES=ON" >> $GITHUB_ENV
           echo "GTSAM_ENABLE_BOOST_SERIALIZATION=ON" >> $GITHUB_ENV
           echo "Using Boost features."
-      
+       
       - name: Set GeographicLib Environment (Conditional)
         if: contains(matrix.name, 'geographiclib') && matrix.build_type == 'Release'
         run: |
