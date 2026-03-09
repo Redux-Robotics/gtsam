@@ -36,7 +36,7 @@ jobs:
             ubuntu-24.04-gcc-14,
             ubuntu-24.04-clang-16,
             ubuntu-24.04-clang-16-boost,
-            blacksmith-2vcpu-ubuntu-2404,
+            blacksmith-4vcpu-ubuntu-2404,
           ]
 
         build_type: [Debug, Release]
