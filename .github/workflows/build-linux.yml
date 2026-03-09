@@ -6,9 +6,9 @@ on:
       - '**.md'
       - '**.ipynb'
       - 'myst.yml'
+  # Enables manual triggering from the Actions tab
+  workflow_dispatch:
 
-# Cancels any in-progress workflow runs for the same PR when a new push is made,
-# allowing the runner to become available more quickly for the latest changes.
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
@@ -16,7 +16,8 @@ concurrency:
 jobs:
   build:
     name: ${{ matrix.name }} ${{ matrix.build_type }}
-    runs-on: ${{ matrix.os }}
+    # Redirects all jobs to Blacksmith infrastructure
+    runs-on: blacksmith-4vcpu-ubuntu-2204
     container:
       image: borglab/gtsam-ci:${{ matrix.os }}-${{ matrix.compiler }}-${{ matrix.version }}
       env:
@@ -27,18 +28,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        # Github Actions requires a single row to be added to the build matrix.
-        # See https://help.github.com/en/articles/workflow-syntax-for-github-actions.
-        name: [
-            # "Bracket" the versions from GCC [11-14] and Clang [11-16]
-            ubuntu-22.04-gcc-11,
-            ubuntu-22.04-clang-11,
-            ubuntu-24.04-gcc-14,
-            ubuntu-24.04-clang-16,
-            ubuntu-24.04-clang-16-boost,
-            blacksmith-4vcpu-ubuntu-2404,
-          ]
-
+        # Use only one source of truth for the matrix to avoid mismatched keys
         build_type: [Debug, Release]
         build_unstable: [ON]
         include:
@@ -67,15 +57,8 @@ jobs:
             compiler: clang
             version: "16"
 
-          - name: blacksmith-2vcpu-ubuntu-2404
-            os: ubuntu-24.04
-            compiler: clang
-            version: "16"
-
         exclude:
           - name: ubuntu-24.04-clang-16-boost
-            build_type: Debug
-          - name: blacksmith-2vcpu-ubuntu-2404
             build_type: Debug
 
     steps:
@@ -96,4 +79,6 @@ jobs:
 
       - name: Build and Test
         run: |
+          # Ensure workspace permissions for the container
+          git config --global --add safe.directory /gtsam
           .github/scripts/unix.sh -t
