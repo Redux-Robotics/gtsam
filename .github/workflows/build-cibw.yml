@@ -15,7 +15,7 @@ jobs:
   # access the same timestamp.
   get_system_time:
     name: Get System Time
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: blacksmith-16vcpu-ubuntu-2404
     outputs:
       timestamp: ${{ steps.get_time.outputs.timestamp }}
     steps:
@@ -57,22 +57,22 @@ jobs:
           - os: ubuntu-24.04-arm
             python_version: "3.11"
             cibw_python_version: 311
-            platform_id: blacksmith-4vcpu-ubuntu-2404-arm
+            platform_id: blacksmith-16vcpu-ubuntu-2404-arm
             manylinux_image: manylinux2014
           - os: ubuntu-24.04-arm
             python_version: "3.12"
             cibw_python_version: 312
-            platform_id: blacksmith-4vcpu-ubuntu-2404-arm
+            platform_id: blacksmith-16vcpu-ubuntu-2404-arm
             manylinux_image: manylinux2014
           - os: ubuntu-24.04-arm
             python_version: "3.13"
             cibw_python_version: 313
-            platform_id: blacksmith-4vcpu-ubuntu-2404-arm
+            platform_id: blacksmith-16vcpu-ubuntu-2404-arm
             manylinux_image: manylinux2014
           - os: ubuntu-24.04-arm
             python_version: "3.14"
             cibw_python_version: 314
-            platform_id: blacksmith-4vcpu-ubuntu-2404-arm
+            platform_id: blacksmith-16vcpu-ubuntu-2404-arm
             manylinux_image: manylinux2014
 
           # MacOS arm64
@@ -185,7 +185,7 @@ jobs:
   upload_all:
     name: Upload All
     needs: build_wheels
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: blacksmith-16vcpu-ubuntu-2404
     permissions:
       id-token: write
     steps:
