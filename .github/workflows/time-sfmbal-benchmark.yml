@@ -22,7 +22,7 @@ permissions:
 
 jobs:
   context:
-    runs-on: blacksmith-8vcpu-ubuntu-2404
+    runs-on: blacksmith-16vcpu-ubuntu-2404
     outputs:
       pr_number: ${{ steps.resolve.outputs.pr_number }}
       head_sha: ${{ steps.resolve.outputs.head_sha }}
@@ -78,7 +78,7 @@ jobs:
 
   dispatch_and_wait:
     needs: context
-    runs-on: blacksmith-8vcpu-ubuntu-2404
+    runs-on: blacksmith-16vcpu-ubuntu-2404
     outputs:
       run_statuses: ${{ steps.dispatch.outputs.run_statuses }}
     steps:
@@ -251,7 +251,7 @@ jobs:
             os_name: macos
             arch: arm64
             tbb: "OFF"
-    runs-on: blacksmith-8vcpu-ubuntu-2404
+    runs-on: blacksmith-16vcpu-ubuntu-2404
     steps:
       - name: Restore head benchmark cache
         id: restore_head
@@ -294,7 +294,7 @@ jobs:
 
   summarize:
     needs: [context, dispatch_and_wait, collect]
-    runs-on: blacksmith-8vcpu-ubuntu-2404
+    runs-on: blacksmith-16vcpu-ubuntu-2404
     if: always()
     steps:
       - name: Checkout

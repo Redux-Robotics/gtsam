@@ -32,7 +32,7 @@ jobs:
         name:
           [
             ubuntu-clang-deprecated,
-            blacksmith-8vcpu-ubuntu-2404,
+            blacksmith-16vcpu-ubuntu-2404,
             ubuntu-clang-tbb,
             ubuntu-clang-cayleymap,
             ubuntu-clang-system-libs,
@@ -49,7 +49,7 @@ jobs:
             version: "14"
             flag: deprecated
 
-          - name: blacksmith-8vcpu-ubuntu-2404
+          - name: blacksmith-16vcpu-ubuntu-2404
             os: ubuntu-22.04
             compiler: clang
             version: "14"
