@@ -10,7 +10,7 @@ on:
       - 'myst.yml'
 jobs:
   trigger-package-build:
-    runs-on: blacksmith-16vcpu-ubuntu-2404
+    runs-on: blacksmith-8vcpu-ubuntu-2404
     steps:
       - name: Trigger Package Rebuild
         uses: actions/github-script@v6

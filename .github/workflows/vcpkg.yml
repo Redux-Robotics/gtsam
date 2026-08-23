@@ -25,7 +25,7 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            triplet: blacksmith-16vcpu-windows-2025
+            triplet: blacksmith-8vcpu-windows-2025
             build_type: Release
             test_target: RUN_TESTS
             python: python
